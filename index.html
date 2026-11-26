@@ -1,101 +1,1107 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Norton’s Theorem: Interactive Presentation</title><style>
-:root{--bg:#F4F1EA;--fg:#0F1B2D;--mut:#5b6b7d;--card:#fff;--amb:#B86E00;--teal:#0B7F75;--dot:#E08A00;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1B2D;--fg:#F4F1EA;--mut:#9FB3C8;--card:#17283F;--amb:#F5A623;--teal:#2EC4B6;--dot:#F5A623}}
-:root[data-theme="dark"]{--bg:#0F1B2D;--fg:#F4F1EA;--mut:#9FB3C8;--card:#17283F;--amb:#F5A623;--teal:#2EC4B6;--dot:#F5A623}
-html{scroll-padding-top:env(safe-area-inset-top,0px);background:var(--bg)}
-body{margin:0 auto;max-width:1100px;padding:16px;background:var(--bg);color:var(--fg);font:16px/1.45 Inter,system-ui,Arial,sans-serif}
-h1{font-size:24px;margin:4px 0 4px}p{margin:6px 0;color:var(--mut)}
-.bar{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
-button{font:inherit;padding:8px 14px;border-radius:999px;border:2px solid var(--amb);background:transparent;color:var(--fg);cursor:pointer}
-button.on{background:var(--amb);color:#0F1B2D;font-weight:600}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
-.card{background:var(--card);border-radius:14px;padding:12px;border-top:5px solid var(--amb)}
-.card h3{margin:0 0 6px;font-size:17px}canvas{width:100%;height:auto;display:block}
-.sl{display:grid;grid-template-columns:1fr;gap:2px;margin:6px 0}.sl span{display:flex;justify-content:space-between;font-size:15px}
-input[type=range]{width:100%;accent-color:var(--amb)}
-.ok{display:inline-block;padding:2px 10px;border-radius:999px;background:var(--teal);color:#0F1B2D;font-weight:700}
-.big{font-size:18px;color:var(--fg)}.cap{color:var(--fg);font-weight:600}
-.slide{display:none}.slide.on{display:block}h2{font-size:26px;margin:0 0 10px;line-height:1.2}.kick{color:var(--amb);letter-spacing:.14em;font-size:13px;font-weight:700;margin:0}
-table{width:100%;border-collapse:collapse;margin:8px 0}th{background:var(--card);color:var(--amb);text-align:left;padding:8px}td{padding:8px;border-bottom:1px solid var(--mut)}
-nav{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:center;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:var(--card);z-index:5}
-body{padding-bottom:90px}.card p{color:var(--fg)}</style></head><body><section class="slide"><p class="kick">ELECTRICAL CIRCUIT ANALYSIS</p><h1 style="font-size:40px;margin:8px 0">Norton’s Theorem</h1><p>Reducing any linear network to one current source and one resistor</p><p>[Tahsin Khanom & Nisha Barua Tusty] · [Introduction to Electrical Engineering (EEE 124)]</p></section><section class="slide"><p class="kick">THE THEOREM</p><h2>Any linear two-terminal network has a Norton equivalent</h2><div class="grid"><div class="card"><h3>Norton current I<sub>N</sub></h3><p>The current through a short circuit placed across the two terminals.</p></div><div class="card"><h3>Norton resistance R<sub>N</sub></h3><p>The resistance seen from the terminals with all independent sources turned off.</p></div><div class="card"><h3>Equivalent</h3><p>I<sub>N</sub> in parallel with R<sub>N</sub> behaves identically at the terminals for any load.</p></div></div><p>Turning sources off: voltage sources become shorts, current sources become open circuits.</p></section><section class="slide"><p class="kick">STEP BY STEP</p><h2>The four steps</h2><div class="grid"><div class="card"><h3>1 · Remove the load</h3><p>Take out R<sub>L</sub>, the component of concern, and label terminals a and b.</p></div><div class="card"><h3>2 · Find R<sub>N</sub></h3><p>Short all voltage sources and open all current sources, then find R between a and b.</p></div><div class="card"><h3>3 · Find I<sub>N</sub></h3><p>Short a to b and use any circuit-analysis method to get the short-circuit current.</p></div><div class="card"><h3>4 · Find I<sub>L</sub></h3><p>Draw I<sub>N</sub> ∥ R<sub>N</sub>, reconnect R<sub>L</sub>, then I<sub>L</sub> = I<sub>N</sub>·R<sub>N</sub> / (R<sub>N</sub> + R<sub>L</sub>).</p></div></div><p>With a dependent source, never turn it off. Find R<sub>N</sub> as V<sub>oc</sub> / I<sub>sc</sub> instead.</p></section><section class="slide"><p class="kick">ANALYSIS METHODS</p><h2>Six ways to find the Norton current</h2><table><tr><th>Method</th><th>Best when</th><th>What it gives</th></tr><tr><td>Series–parallel + Ohm’s law</td><td>Shorted circuit is simple</td><td>I<sub>N</sub> = V / R total</td></tr><tr><td>Nodal analysis (KCL)</td><td>Many nodes, current sources</td><td>Node voltages, then I<sub>N</sub></td></tr><tr><td>Mesh analysis (KVL)</td><td>Many loops, voltage sources</td><td>Mesh current in the short</td></tr><tr><td>Superposition</td><td>Several independent sources</td><td>Add each source’s I<sub>N</sub></td></tr><tr><td>Source transformation</td><td>Source–resistor pairs to merge</td><td>One current source</td></tr><tr><td>Thévenin conversion</td><td>V<sub>Th</sub> already known</td><td>I<sub>N</sub> = V<sub>Th</sub> / R<sub>Th</sub></td></tr></table><p>With dependent sources, use nodal or mesh analysis and keep the control variable, or use I<sub>N</sub> = V<sub>oc</sub> / R<sub>N</sub>.</p></section><section class="slide"><p class="kick">SAME CIRCUIT · FOUR METHODS</p><h2>All give I<sub>N</sub> = 1.5 A</h2><p>12 V source, R1 = 2 Ω, node X with R3 = 4 Ω to ground, R2 = 4 Ω to terminal a. Short a–b.</p><div class="grid"><div class="card"><h3>Nodal</h3><p>KCL at X: (12 − V) / 2 = V / 4 + V / 4, so V = 6 V. I<sub>N</sub> = 6 / 4 = 1.5 A.</p></div><div class="card"><h3>Mesh</h3><p>12 = 2I<sub>1</sub> + 4(I<sub>1</sub> − I<sub>2</sub>), 0 = 4I<sub>2</sub> + 4(I<sub>2</sub> − I<sub>1</sub>). I<sub>1</sub> = 3 A, so I<sub>N</sub> = I<sub>2</sub> = 1.5 A.</p></div><div class="card"><h3>Source transformation</h3><p>12 V with 2 Ω becomes 6 A ∥ 2 Ω. The 6 A splits by conductance (0.5, 0.25, 0.25 S): the short takes 1.5 A.</p></div><div class="card"><h3>Thévenin conversion</h3><p>V<sub>Th</sub> = 8 V, R<sub>Th</sub> = 16/3 Ω. I<sub>N</sub> = 8 / (16/3) = 1.5 A.</p></div></div></section><section class="slide"><p class="kick">EXAMPLE 1 · INDEPENDENT SOURCE</p><h2>24 V, 6 Ω in series, 12 Ω shunt, 4 Ω load</h2><div class="grid"><div class="card"><h3>1 · Original</h3><p>Load R<sub>L</sub> = 4 Ω across a–b.</p></div><div class="card"><h3>2 · Find I<sub>N</sub></h3><p>Short a–b. The 12 Ω is bypassed, so I<sub>N</sub> = 24 / 6 = 4 A.</p></div><div class="card"><h3>3 · Find R<sub>N</sub></h3><p>Short the source. R<sub>N</sub> = 6 ∥ 12 = 4 Ω.</p></div><div class="card"><h3>4 · Load current</h3><p>I<sub>L</sub> = 4 × 4 / (4 + 4) = 2 A.</p></div></div></section><section class="slide"><p class="kick">EXAMPLE 2 · DEPENDENT SOURCE</p><h2>12 V, 4 Ω, 2 Ω, dependent source 2·I<sub>x</sub>, load 1.2 Ω</h2><p>I<sub>x</sub> is the current in the 4 Ω. The dependent source stays in the circuit.</p><div class="grid"><div class="card"><h3>I<sub>N</sub> = 9 A</h3><p>Short a–b: the 2 Ω carries nothing. I<sub>x</sub> = 12 / 4 = 3 A, the source gives 6 A, so I<sub>N</sub> = 3 + 6.</p></div><div class="card"><h3>V<sub>oc</sub> = 7.2 V</h3><p>KCL at a: I<sub>x</sub> + 2I<sub>x</sub> = V<sub>a</sub> / 2 with I<sub>x</sub> = (12 − V<sub>a</sub>) / 4.</p></div><div class="card"><h3>R<sub>N</sub> = 0.8 Ω</h3><p>V<sub>oc</sub> / I<sub>N</sub> = 7.2 / 9. Then I<sub>L</sub> = 9 × 0.8 / 2.0 = 3.6 A.</p></div></div></section><section class="slide"><p class="kick">TEXTBOOK EXAMPLE 4.11</p><h2>Alexander &amp; Sadiku: Norton equivalent at a–b</h2><p>2 A source, 4 Ω with 12 V, two 8 Ω resistors, 5 Ω shunt.</p><div class="grid"><div class="card"><h3>R<sub>N</sub> = 4 Ω</h3><p>Sources off: 5 ∥ (8 + 4 + 8) = 5 ∥ 20 = 4 Ω.</p></div><div class="card"><h3>I<sub>N</sub> = 1 A</h3><p>Short a–b (the 5 Ω is bypassed). Mesh: i<sub>1</sub> = 2 A and 20i<sub>2</sub> − 4i<sub>1</sub> − 12 = 0, so i<sub>2</sub> = 1 A = i<sub>sc</sub>.</p></div><div class="card"><h3>Equivalent</h3><p>1 A in parallel with 4 Ω, as seen from terminals a–b.</p></div></div></section><section class="slide"><p class="kick">STEP-BY-STEP BREAKDOWN · TEXTBOOK EXAMPLE 4.11</p><h2 id="bkh"></h2><div class="bar" id="bks"><button>Step 1</button><button>Step 2</button><button>Step 3</button><button>Step 4</button></div><div class="card"><canvas id="bk" width="960" height="600"></canvas></div><p class="cap" id="bkt"></p></section><section class="slide">
-<h1>⚡ Norton’s Theorem Simulator</h1>
-<p>Move the sliders. Watch the original circuit and its Norton equivalent give the same load current.</p>
-<div class="bar" id="modes"><button data-m="ind" class="on">Independent source</button><button data-m="dep">Dependent source</button><button data-m="book">Textbook Ex. 4.11</button></div>
-<div class="bar" id="views"><button data-v="full" class="on">Full circuit</button><button data-v="open">1 · Remove load</button><button data-v="short">2 · Short a–b</button></div>
-<p class="cap" id="cap"></p>
-<div class="grid">
-<div class="card"><h3 id="t1">Original circuit</h3><canvas id="c1"></canvas></div>
-<div class="card"><h3>Norton equivalent</h3><canvas id="c2"></canvas></div>
-</div>
-<div class="grid" style="margin-top:12px">
-<div class="card"><h3>Controls</h3><div id="sl"></div></div>
-<div class="card"><h3>Results</h3><p class="big" id="r1"></p><p class="big" id="r2"></p><p class="big" id="mt"></p><p class="big" id="eq"></p></div>
-</div>
-</section><section class="slide"><p class="kick">NORTON VS THÉVENIN</p><h2>Two views of the same network</h2><table><tr><th>Feature</th><th>Norton</th><th>Thévenin</th></tr><tr><td>Source</td><td>Current source I<sub>N</sub></td><td>Voltage source V<sub>Th</sub></td></tr><tr><td>Resistor</td><td>In parallel</td><td>In series</td></tr><tr><td>Found by</td><td>Short-circuit current</td><td>Open-circuit voltage</td></tr><tr><td>Resistance</td><td>R<sub>N</sub></td><td>R<sub>Th</sub> = R<sub>N</sub></td></tr></table><p>I<sub>N</sub> = V<sub>Th</sub> / R<sub>Th</sub> · V<sub>Th</sub> = I<sub>N</sub> × R<sub>N</sub></p></section><section class="slide"><p class="kick">FACTS AND LIMITS</p><h2>Why it matters, and where it stops</h2><div class="grid"><div class="card"><h3>Key facts</h3><p>Published 1926 by Edward L. Norton of Bell Labs. Hans F. Mayer reached it independently. Maximum power reaches the load when R<sub>L</sub> = R<sub>N</sub>.</p></div><div class="card"><h3>Applications</h3><p>Fast load-change analysis, transistor and amplifier models, current-driven sensor circuits.</p></div><div class="card"><h3>Limitations</h3><p>Linear circuits only. Diodes and other non-linear parts break it. The equivalence holds at the terminals, not inside.</p></div></div></section><nav><button id="pv">← Back</button><b id="ct"></b><button id="nx" class="on">Next →</button></nav><script>
-var $=function(i){return document.getElementById(i)},mode='ind',view='full',P={},f2=function(v){return v.toFixed(2)};
-var SL=[['Vs','Source voltage',1,48,1,'V'],['R1','R1 (series)',1,20,.5,'Ω'],['R2','R2 (shunt)',1,30,.5,'Ω'],['k','Dependent gain k (source = k·Ix)',0,4,.5,''],['RL','Load RL',.5,20,.1,'Ω'],['Is','Current source Is',0,10,.5,'A'],['Rm','Rm (series with source)',1,20,.5,'Ω'],['Rs','Rs (top and bottom)',1,20,.5,'Ω'],['Rp','Rp (shunt)',1,30,.5,'Ω']],KEYS={ind:['Vs','R1','R2','RL'],dep:['Vs','R1','R2','k','RL'],book:['Is','Vs','Rm','Rs','Rp','RL']};
-function defs(){P=mode=='ind'?{Vs:24,R1:6,R2:12,k:0,RL:4}:mode=='dep'?{Vs:12,R1:4,R2:2,k:2,RL:1.2}:{Vs:12,Is:2,Rm:4,Rs:8,Rp:5,RL:4};build()}
-function build(){var h='';KEYS[mode].map(function(q){return SL.filter(function(s){return s[0]==q})[0]}).forEach(function(s){h+='<label class="sl"><span><b>'+s[1]+'</b><i id="v'+s[0]+'">'+P[s[0]]+' '+s[5]+'</i></span><input type="range" min="'+s[2]+'" max="'+s[3]+'" step="'+s[4]+'" value="'+P[s[0]]+'" data-k="'+s[0]+'"></label>'});$('sl').innerHTML=h;
-[].forEach.call(document.querySelectorAll('input[type=range]'),function(e){e.oninput=function(){var k=e.dataset.k;P[k]=+e.value;$('v'+k).textContent=P[k]+' '+SL.filter(function(s){return s[0]==k})[0][5];info()}});info()}
-function calcB(v){var Is=P.Is,Vs=P.Vs,Rm=P.Rm,Rs2=2*P.Rs,Rp=P.Rp,RL=P.RL,Z=v=='short'?0:v=='open'?Rp:1/(1/Rp+1/RL),a=Is+Vs/Rm,Vd=a/(1/Rm+1/(Rs2+Z)),I2=Vd/(Rs2+Z),Vab=I2*Z,Il=v=='open'?0:v=='short'?I2:Vab/RL,IN=a/(1/Rm+1/Rs2)/Rs2,RN=1/(1/Rp+1/(Rm+Rs2)),Vo=a/(1/Rm+1/(Rs2+Rp))/(Rs2+Rp)*Rp;return{Is:Is,Im:(Vd-Vs)/Rm,I2:I2,Ip:Vab/Rp,Il:Il,IL:Il,IN:IN,RN:RN,Voc:Vo,ILn:IN*RN/(RN+RL)}}
-function calc(v){if(mode=='book')return calcB(v);var g=(1+P.k)/P.R1,IN=(1+P.k)*P.Vs/P.R1,RN=1/(g+1/P.R2),Voc=IN*RN,ILn=IN*RN/(RN+P.RL);
-var Va=v=='open'?Voc:v=='short'?0:ILn*P.RL,Ix=(P.Vs-Va)/P.R1,IR2=Va/P.R2,IL=Ix-IR2+P.k*Ix;return{IN:IN,RN:RN,Voc:Voc,ILn:ILn,Va:Va,Ix:Ix,IR2:IR2,IL:IL}}
-function info(){var F=calc('full'),C=calc(view),ok=Math.abs(F.IL-F.ILn)<1e-9;
-$('r1').innerHTML='Original circuit: I<sub>L</sub> = <b>'+f2(F.IL)+' A</b>';$('r2').innerHTML='Norton equivalent: I<sub>L</sub> = <b>'+f2(F.ILn)+' A</b>';
-$('mt').innerHTML=ok?'<span class="ok">Match ✓</span>':'No match';
-$('eq').innerHTML='I<sub>N</sub> = '+f2(F.IN)+' A<br>V<sub>oc</sub> = '+f2(F.Voc)+' V<br>R<sub>N</sub> = V<sub>oc</sub> / I<sub>N</sub> = '+f2(F.RN)+' Ω';
-$('cap').textContent=view=='full'?'Full circuit with the load connected: '+f2(F.IL)+' A flows through RL.':view=='open'?'Step 1 · load removed. The terminals are open, so the open-circuit voltage is '+f2(F.Voc)+' V.':'Step 2 · load replaced by a wire. The short-circuit current is IN = '+f2(F.IN)+' A.';
-$('t1').textContent=view=='full'?'Original circuit':view=='open'?'Load removed':'Terminals shorted'}
-[].forEach.call(document.querySelectorAll('#modes button'),function(b){b.onclick=function(){mode=b.dataset.m;[].forEach.call(document.querySelectorAll('#modes button'),function(x){x.className=x==b?'on':''});defs()}});
-[].forEach.call(document.querySelectorAll('#views button'),function(b){b.onclick=function(){view=b.dataset.v;[].forEach.call(document.querySelectorAll('#views button'),function(x){x.className=x==b?'on':''});info()}});
-var c1=$('c1'),c2=$('c2');c1.width=c2.width=960;c1.height=c2.height=600;var X1=c1.getContext('2d'),X2=c2.getContext('2d');X1.scale(2,2);X2.scale(2,2);
-function col(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
-function zig(c,ax,ay,bx,by){var dx=bx-ax,dy=by-ay,L=Math.hypot(dx,dy),nx=-dy/L*7,ny=dx/L*7;c.beginPath();c.moveTo(ax,ay);for(var i=0;i<6;i++){var t=(i+.5)/6,s=i%2?1:-1;c.lineTo(ax+dx*t+s*nx,ay+dy*t+s*ny)}c.lineTo(bx,by);c.stroke()}
-function tx(c,s,x,y,co,a){c.font='bold 15px system-ui,Arial,sans-serif';c.fillStyle=co;c.textAlign=a||'center';c.fillText(s,x,y)}
-function scene(c,C,t,segs,comps,extra){c.clearRect(0,0,480,300);c.lineWidth=2.5;c.strokeStyle=C.fg;
-segs.forEach(function(s){c.beginPath();c.moveTo(s[0],s[1]);c.lineTo(s[2],s[3]);c.stroke()});var Z=[];
-comps.forEach(function(o){var x=o.x,y=o.y;c.fillStyle=C.card;c.lineWidth=2.5;
-if(o.t=='rh'){Z.push([x-40,y-12,x+40,y+12]);c.fillRect(x-40,y-10,80,20);c.strokeStyle=C.amb;zig(c,x-40,y,x+40,y);tx(c,o.l,x,y-16,C.amb)}
-if(o.t=='rv'){Z.push([x-12,y-30,x+12,y+30]);c.fillRect(x-10,y-30,20,60);c.strokeStyle=o.c||C.amb;zig(c,x,y-30,x,y+30);tx(c,o.l,x-14,y+5,o.c||C.amb,'end')}
-if(o.t=='v'||o.t=='i'||o.t=='d'){Z.push([x-24,y-24,x+24,y+24]);c.strokeStyle=C.teal;c.beginPath();if(o.t=='d'){c.moveTo(x,y-22);c.lineTo(x+22,y);c.lineTo(x,y+22);c.lineTo(x-22,y);c.closePath()}else c.arc(x,y,22,0,7);c.fill();c.stroke();
-if(o.t=='v')tx(c,o.l,x,y+5,C.teal);else{c.beginPath();c.moveTo(x,y+12);c.lineTo(x,y-12);c.moveTo(x-7,y-4);c.lineTo(x,y-12);c.lineTo(x+7,y-4);c.stroke();tx(c,o.l,o.o?x+28:x,o.o?y+5:y+42,C.teal,o.o?'start':'center')}}});
-segs.forEach(function(s){var cur=s[4];if(Math.abs(cur)<1e-6)return;var L=Math.hypot(s[2]-s[0],s[3]-s[1]),n=Math.max(1,Math.round(L/26)),v=(cur<0?-1:1)*38*Math.sqrt(Math.abs(cur));
-for(var i=0;i<n;i++){var u=(((i/n+v*t/L)%1)+1)%1,px=s[0]+(s[2]-s[0])*u,py=s[1]+(s[3]-s[1])*u;if(Z.some(function(z){return px>z[0]&&px<z[2]&&py>z[1]&&py<z[3]}))continue;c.fillStyle=C.dot;c.beginPath();c.arc(px,py,4,0,7);c.fill()}});
-extra&&extra(c,C)}
-function frame(ms){var t=ms/1000,C={bg:col('--bg'),fg:col('--fg'),card:col('--card'),amb:col('--amb'),teal:col('--teal'),dot:col('--dot')},A=calc(view),F=calc('full'),k=P.k;
-var S=[[50,250,50,50,A.Ix],[50,50,250,50,A.Ix],[250,50,330,50,A.Ix-A.IR2],[330,50,420,50,A.IL],[420,250,330,250,A.IL],[330,250,250,250,A.IL-k*A.Ix],[250,250,50,250,A.Ix],[250,50,250,250,A.IR2]];
-if(view!='open')S.push([420,50,420,250,A.IL]);if(k>0)S.push([330,250,330,50,k*A.Ix]);
-var K=[{t:'v',x:50,y:150,l:P.Vs+'V'},{t:'rh',x:150,y:50,l:P.R1+'Ω'},{t:'rv',x:250,y:150,l:P.R2+'Ω'}];
-if(k>0)K.push({t:'d',x:330,y:150,l:k+'·Ix',o:1});if(view=='full')K.push({t:'rv',x:420,y:150,l:P.RL+'Ω',c:C.teal});
-if(mode=='book'){S=[[40,250,40,50,A.Is],[40,50,120,50,A.Is],[120,50,310,50,A.I2],[120,50,120,250,A.Im],[310,50,310,250,A.Ip],[310,50,420,50,A.Il],[420,250,310,250,A.Il],[310,250,120,250,A.I2],[120,250,40,250,A.Is]];if(view!='open')S.push([420,50,420,250,A.Il]);K=[{t:'i',x:40,y:150,l:P.Is+' A'},{t:'rv',x:120,y:105,l:P.Rm+'Ω'},{t:'v',x:120,y:195,l:P.Vs+'V'},{t:'rh',x:210,y:50,l:P.Rs+'Ω'},{t:'rh',x:210,y:250,l:P.Rs+'Ω'},{t:'rv',x:310,y:150,l:P.Rp+'Ω'}];if(view=='full')K.push({t:'rv',x:420,y:150,l:P.RL+'Ω',c:C.teal})}
-scene(X1,C,t,S,K,function(c,C){tx(c,'a',440,54,C.fg);tx(c,'b',440,254,C.fg);if(view=='open'){[50,250].forEach(function(y){c.fillStyle=C.fg;c.beginPath();c.arc(420,y,5,0,7);c.fill()});tx(c,'Voc = '+f2(A.Voc)+' V',385,155,C.teal)}if(view=='short')tx(c,'IN = '+f2(A.IN)+' A',385,155,C.teal)});
-var N=[[80,250,80,50,F.IN],[80,50,250,50,F.IN],[250,50,420,50,F.ILn],[250,50,250,250,F.IN-F.ILn],[420,50,420,250,F.ILn],[420,250,250,250,F.ILn],[250,250,80,250,F.IN]];
-scene(X2,C,t,N,[{t:'i',x:80,y:150,l:f2(F.IN)+' A'},{t:'rv',x:250,y:150,l:f2(F.RN)+'Ω'},{t:'rv',x:420,y:150,l:P.RL+'Ω',c:C.teal}],function(c,C){tx(c,'a',440,54,C.fg);tx(c,'b',440,254,C.fg)});
-requestAnimationFrame(frame)}
-defs();requestAnimationFrame(frame);
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Norton’s Theorem: Interactive Presentation</title>
+    <style>
+      /* ===== THEME COLORS (light by default, dark via system setting) ===== */
+      :root {
+        --bg: #f4f1ea;
+        --fg: #0f1b2d;
+        --mut: #5b6b7d;
+        --card: #fff;
+        --amb: #b86e00;
+        --teal: #0b7f75;
+        --dot: #e08a00;
+        box-sizing: border-box;
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --bg: #0f1b2d;
+          --fg: #f4f1ea;
+          --mut: #9fb3c8;
+          --card: #17283f;
+          --amb: #f5a623;
+          --teal: #2ec4b6;
+          --dot: #f5a623;
+        }
+      }
+      :root[data-theme="dark"] {
+        --bg: #0f1b2d;
+        --fg: #f4f1ea;
+        --mut: #9fb3c8;
+        --card: #17283f;
+        --amb: #f5a623;
+        --teal: #2ec4b6;
+        --dot: #f5a623;
+      }
+      /* ===== PAGE LAYOUT AND TEXT ===== */
+      html {
+        scroll-padding-top: env(safe-area-inset-top, 0px);
+        background: var(--bg);
+      }
+      body {
+        margin: 0 auto;
+        max-width: 1100px;
+        padding: 16px;
+        background: var(--bg);
+        color: var(--fg);
+        font:
+          16px/1.45 Inter,
+          system-ui,
+          Arial,
+          sans-serif;
+      }
+      h1 {
+        font-size: 24px;
+        margin: 4px 0 4px;
+      }
+      p {
+        margin: 6px 0;
+        color: var(--mut);
+      }
+      .bar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      button {
+        font: inherit;
+        padding: 8px 14px;
+        border-radius: 999px;
+        border: 2px solid var(--amb);
+        background: transparent;
+        color: var(--fg);
+        cursor: pointer;
+      }
+      button.on {
+        background: var(--amb);
+        color: #0f1b2d;
+        font-weight: 600;
+      }
+      /* ===== CARDS, GRID AND CONTROLS ===== */
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 12px;
+      }
+      .card {
+        background: var(--card);
+        border-radius: 14px;
+        padding: 12px;
+        border-top: 5px solid var(--amb);
+      }
+      .card h3 {
+        margin: 0 0 6px;
+        font-size: 17px;
+      }
+      canvas {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .sl {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2px;
+        margin: 6px 0;
+      }
+      .sl span {
+        display: flex;
+        justify-content: space-between;
+        font-size: 15px;
+      }
+      input[type="range"] {
+        width: 100%;
+        accent-color: var(--amb);
+      }
+      .ok {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 999px;
+        background: var(--teal);
+        color: #0f1b2d;
+        font-weight: 700;
+      }
+      .big {
+        font-size: 18px;
+        color: var(--fg);
+      }
+      .cap {
+        color: var(--fg);
+        font-weight: 600;
+      }
+      /* ===== SLIDES, TABLES AND NAVIGATION BAR ===== */
+      .slide {
+        display: none;
+      }
+      .slide.on {
+        display: block;
+      }
+      h2 {
+        font-size: 26px;
+        margin: 0 0 10px;
+        line-height: 1.2;
+      }
+      .kick {
+        color: var(--amb);
+        letter-spacing: 0.14em;
+        font-size: 13px;
+        font-weight: 700;
+        margin: 0;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 8px 0;
+      }
+      th {
+        background: var(--card);
+        color: var(--amb);
+        text-align: left;
+        padding: 8px;
+      }
+      td {
+        padding: 8px;
+        border-bottom: 1px solid var(--mut);
+      }
+      nav {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+        background: var(--card);
+        z-index: 5;
+      }
+      body {
+        padding-bottom: 90px;
+      }
+      .card p {
+        color: var(--fg);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Slide 1: Cover -->
+    <section class="slide">
+      <p class="kick">ELECTRICAL CIRCUIT ANALYSIS</p>
+      <h1 style="font-size: 40px; margin: 8px 0">Norton’s Theorem</h1>
+      <p>Reducing any linear network to one current source and one resistor</p>
+      <p>
+        [Tahsin Khanom &amp; Nisha Barua Tusty] · [Introduction to Electrical Engineering (EEE 124)]
+      </p>
+    </section>
+    <!-- Slide 2: The theorem -->
+    <section class="slide">
+      <p class="kick">THE THEOREM</p>
+      <h2>Any linear two-terminal network has a Norton equivalent</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Norton current I<sub>N</sub></h3>
+          <p>The current through a short circuit placed across the two terminals.</p>
+        </div>
+        <div class="card">
+          <h3>Norton resistance R<sub>N</sub></h3>
+          <p>The resistance seen from the terminals with all independent sources turned off.</p>
+        </div>
+        <div class="card">
+          <h3>Equivalent</h3>
+          <p>
+            I<sub>N</sub> in parallel with R<sub>N</sub> behaves identically at the terminals for
+            any load.
+          </p>
+        </div>
+      </div>
+      <p>
+        Turning sources off: voltage sources become shorts, current sources become open circuits.
+      </p>
+    </section>
+    <!-- Slide 3: The four steps -->
+    <section class="slide">
+      <p class="kick">STEP BY STEP</p>
+      <h2>The four steps</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>1 · Remove the load</h3>
+          <p>Take out R<sub>L</sub>, the component of concern, and label terminals a and b.</p>
+        </div>
+        <div class="card">
+          <h3>2 · Find R<sub>N</sub></h3>
+          <p>
+            Short all voltage sources and open all current sources, then find R between a and b.
+          </p>
+        </div>
+        <div class="card">
+          <h3>3 · Find I<sub>N</sub></h3>
+          <p>Short a to b and use any circuit-analysis method to get the short-circuit current.</p>
+        </div>
+        <div class="card">
+          <h3>4 · Find I<sub>L</sub></h3>
+          <p>
+            Draw I<sub>N</sub> ∥ R<sub>N</sub>, reconnect R<sub>L</sub>, then I<sub>L</sub> =
+            I<sub>N</sub>·R<sub>N</sub> / (R<sub>N</sub> + R<sub>L</sub>).
+          </p>
+        </div>
+      </div>
+      <p>
+        With a dependent source, never turn it off. Find R<sub>N</sub> as V<sub>oc</sub> / I<sub
+          >sc</sub
+        >
+        instead.
+      </p>
+    </section>
+    <!-- Slide 4: Analysis methods -->
+    <section class="slide">
+      <p class="kick">ANALYSIS METHODS</p>
+      <h2>Six ways to find the Norton current</h2>
+      <table>
+        <tr>
+          <th>Method</th>
+          <th>Best when</th>
+          <th>What it gives</th>
+        </tr>
+        <tr>
+          <td>Series–parallel + Ohm’s law</td>
+          <td>Shorted circuit is simple</td>
+          <td>I<sub>N</sub> = V / R total</td>
+        </tr>
+        <tr>
+          <td>Nodal analysis (KCL)</td>
+          <td>Many nodes, current sources</td>
+          <td>Node voltages, then I<sub>N</sub></td>
+        </tr>
+        <tr>
+          <td>Mesh analysis (KVL)</td>
+          <td>Many loops, voltage sources</td>
+          <td>Mesh current in the short</td>
+        </tr>
+        <tr>
+          <td>Superposition</td>
+          <td>Several independent sources</td>
+          <td>Add each source’s I<sub>N</sub></td>
+        </tr>
+        <tr>
+          <td>Source transformation</td>
+          <td>Source–resistor pairs to merge</td>
+          <td>One current source</td>
+        </tr>
+        <tr>
+          <td>Thévenin conversion</td>
+          <td>V<sub>Th</sub> already known</td>
+          <td>I<sub>N</sub> = V<sub>Th</sub> / R<sub>Th</sub></td>
+        </tr>
+      </table>
+      <p>
+        With dependent sources, use nodal or mesh analysis and keep the control variable, or use
+        I<sub>N</sub> = V<sub>oc</sub> / R<sub>N</sub>.
+      </p>
+    </section>
+    <!-- Slide 5: Same circuit, four methods -->
+    <section class="slide">
+      <p class="kick">SAME CIRCUIT · FOUR METHODS</p>
+      <h2>All give I<sub>N</sub> = 1.5 A</h2>
+      <p>
+        12 V source, R1 = 2 Ω, node X with R3 = 4 Ω to ground, R2 = 4 Ω to terminal a. Short a–b.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <h3>Nodal</h3>
+          <p>KCL at X: (12 − V) / 2 = V / 4 + V / 4, so V = 6 V. I<sub>N</sub> = 6 / 4 = 1.5 A.</p>
+        </div>
+        <div class="card">
+          <h3>Mesh</h3>
+          <p>
+            12 = 2I<sub>1</sub> + 4(I<sub>1</sub> − I<sub>2</sub>), 0 = 4I<sub>2</sub> + 4(I<sub
+              >2</sub
+            >
+            − I<sub>1</sub>). I<sub>1</sub> = 3 A, so I<sub>N</sub> = I<sub>2</sub> = 1.5 A.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Source transformation</h3>
+          <p>
+            12 V with 2 Ω becomes 6 A ∥ 2 Ω. The 6 A splits by conductance (0.5, 0.25, 0.25 S): the
+            short takes 1.5 A.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Thévenin conversion</h3>
+          <p>V<sub>Th</sub> = 8 V, R<sub>Th</sub> = 16/3 Ω. I<sub>N</sub> = 8 / (16/3) = 1.5 A.</p>
+        </div>
+      </div>
+    </section>
+    <!-- Slide 6: Example 1: independent source -->
+    <section class="slide">
+      <p class="kick">EXAMPLE 1 · INDEPENDENT SOURCE</p>
+      <h2>24 V, 6 Ω in series, 12 Ω shunt, 4 Ω load</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>1 · Original</h3>
+          <p>Load R<sub>L</sub> = 4 Ω across a–b.</p>
+        </div>
+        <div class="card">
+          <h3>2 · Find I<sub>N</sub></h3>
+          <p>Short a–b. The 12 Ω is bypassed, so I<sub>N</sub> = 24 / 6 = 4 A.</p>
+        </div>
+        <div class="card">
+          <h3>3 · Find R<sub>N</sub></h3>
+          <p>Short the source. R<sub>N</sub> = 6 ∥ 12 = 4 Ω.</p>
+        </div>
+        <div class="card">
+          <h3>4 · Load current</h3>
+          <p>I<sub>L</sub> = 4 × 4 / (4 + 4) = 2 A.</p>
+        </div>
+      </div>
+    </section>
+    <!-- Slide 7: Example 2: dependent source -->
+    <section class="slide">
+      <p class="kick">EXAMPLE 2 · DEPENDENT SOURCE</p>
+      <h2>12 V, 4 Ω, 2 Ω, dependent source 2·I<sub>x</sub>, load 1.2 Ω</h2>
+      <p>I<sub>x</sub> is the current in the 4 Ω. The dependent source stays in the circuit.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>I<sub>N</sub> = 9 A</h3>
+          <p>
+            Short a–b: the 2 Ω carries nothing. I<sub>x</sub> = 12 / 4 = 3 A, the source gives 6 A,
+            so I<sub>N</sub> = 3 + 6.
+          </p>
+        </div>
+        <div class="card">
+          <h3>V<sub>oc</sub> = 7.2 V</h3>
+          <p>
+            KCL at a: I<sub>x</sub> + 2I<sub>x</sub> = V<sub>a</sub> / 2 with I<sub>x</sub> = (12 −
+            V<sub>a</sub>) / 4.
+          </p>
+        </div>
+        <div class="card">
+          <h3>R<sub>N</sub> = 0.8 Ω</h3>
+          <p>
+            V<sub>oc</sub> / I<sub>N</sub> = 7.2 / 9. Then I<sub>L</sub> = 9 × 0.8 / 2.0 = 3.6 A.
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- Slide 8: Textbook Example 4.11 -->
+    <section class="slide">
+      <p class="kick">TEXTBOOK EXAMPLE 4.11</p>
+      <h2>Alexander &amp; Sadiku: Norton equivalent at a–b</h2>
+      <p>2 A source, 4 Ω with 12 V, two 8 Ω resistors, 5 Ω shunt.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>R<sub>N</sub> = 4 Ω</h3>
+          <p>Sources off: 5 ∥ (8 + 4 + 8) = 5 ∥ 20 = 4 Ω.</p>
+        </div>
+        <div class="card">
+          <h3>I<sub>N</sub> = 1 A</h3>
+          <p>
+            Short a–b (the 5 Ω is bypassed). Mesh: i<sub>1</sub> = 2 A and 20i<sub>2</sub> − 4i<sub
+              >1</sub
+            >
+            − 12 = 0, so i<sub>2</sub> = 1 A = i<sub>sc</sub>.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Equivalent</h3>
+          <p>1 A in parallel with 4 Ω, as seen from terminals a–b.</p>
+        </div>
+      </div>
+    </section>
+    <!-- Slide 9: Step-by-step circuit breakdown -->
+    <section class="slide">
+      <p class="kick">STEP-BY-STEP BREAKDOWN · TEXTBOOK EXAMPLE 4.11</p>
+      <h2 id="bkh"></h2>
+      <div class="bar" id="bks">
+        <button>Step 1</button><button>Step 2</button><button>Step 3</button><button>Step 4</button>
+      </div>
+      <div class="card"><canvas id="bk" width="960" height="600"></canvas></div>
+      <p class="cap" id="bkt"></p>
+    </section>
+    <!-- Slide 10: Full simulator -->
+    <section class="slide">
+      <h1>⚡ Norton’s Theorem Simulator</h1>
+      <p>
+        Move the sliders. Watch the original circuit and its Norton equivalent give the same load
+        current.
+      </p>
+      <div class="bar" id="modes">
+        <button data-m="ind" class="on">Independent source</button
+        ><button data-m="dep">Dependent source</button
+        ><button data-m="book">Textbook Ex. 4.11</button>
+      </div>
+      <div class="bar" id="views">
+        <button data-v="full" class="on">Full circuit</button
+        ><button data-v="open">1 · Remove load</button><button data-v="short">2 · Short a–b</button>
+      </div>
+      <p class="cap" id="cap"></p>
+      <div class="grid">
+        <div class="card">
+          <h3 id="t1">Original circuit</h3>
+          <canvas id="c1"></canvas>
+        </div>
+        <div class="card">
+          <h3>Norton equivalent</h3>
+          <canvas id="c2"></canvas>
+        </div>
+      </div>
+      <div class="grid" style="margin-top: 12px">
+        <div class="card">
+          <h3>Controls</h3>
+          <div id="sl"></div>
+        </div>
+        <div class="card">
+          <h3>Results</h3>
+          <p class="big" id="r1"></p>
+          <p class="big" id="r2"></p>
+          <p class="big" id="mt"></p>
+          <p class="big" id="eq"></p>
+        </div>
+      </div>
+    </section>
+    <!-- Slide 11: Norton vs Thévenin -->
+    <section class="slide">
+      <p class="kick">NORTON VS THÉVENIN</p>
+      <h2>Two views of the same network</h2>
+      <table>
+        <tr>
+          <th>Feature</th>
+          <th>Norton</th>
+          <th>Thévenin</th>
+        </tr>
+        <tr>
+          <td>Source</td>
+          <td>Current source I<sub>N</sub></td>
+          <td>Voltage source V<sub>Th</sub></td>
+        </tr>
+        <tr>
+          <td>Resistor</td>
+          <td>In parallel</td>
+          <td>In series</td>
+        </tr>
+        <tr>
+          <td>Found by</td>
+          <td>Short-circuit current</td>
+          <td>Open-circuit voltage</td>
+        </tr>
+        <tr>
+          <td>Resistance</td>
+          <td>R<sub>N</sub></td>
+          <td>R<sub>Th</sub> = R<sub>N</sub></td>
+        </tr>
+      </table>
+      <p>
+        I<sub>N</sub> = V<sub>Th</sub> / R<sub>Th</sub> · V<sub>Th</sub> = I<sub>N</sub> × R<sub
+          >N</sub
+        >
+      </p>
+    </section>
+    <!-- Slide 12: Facts and limits -->
+    <section class="slide">
+      <p class="kick">FACTS AND LIMITS</p>
+      <h2>Why it matters, and where it stops</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Key facts</h3>
+          <p>
+            Published 1926 by Edward L. Norton of Bell Labs. Hans F. Mayer reached it independently.
+            Maximum power reaches the load when R<sub>L</sub> = R<sub>N</sub>.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Applications</h3>
+          <p>
+            Fast load-change analysis, transistor and amplifier models, current-driven sensor
+            circuits.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Limitations</h3>
+          <p>
+            Linear circuits only. Diodes and other non-linear parts break it. The equivalence holds
+            at the terminals, not inside.
+          </p>
+        </div>
+      </div>
+    </section>
+    <nav>
+      <button id="pv">← Back</button><b id="ct"></b><button id="nx" class="on">Next →</button>
+    </nav>
+    <script>
+      /* ===== 1. SHARED STATE AND SLIDER DEFINITIONS ===== */
+      var $ = function (i) {
+          return document.getElementById(i);
+        },
+        mode = "ind",
+        view = "full",
+        P = {},
+        f2 = function (v) {
+          return v.toFixed(2);
+        };
+      var SL = [
+          ["Vs", "Source voltage", 1, 48, 1, "V"],
+          ["R1", "R1 (series)", 1, 20, 0.5, "Ω"],
+          ["R2", "R2 (shunt)", 1, 30, 0.5, "Ω"],
+          ["k", "Dependent gain k (source = k·Ix)", 0, 4, 0.5, ""],
+          ["RL", "Load RL", 0.5, 20, 0.1, "Ω"],
+          ["Is", "Current source Is", 0, 10, 0.5, "A"],
+          ["Rm", "Rm (series with source)", 1, 20, 0.5, "Ω"],
+          ["Rs", "Rs (top and bottom)", 1, 20, 0.5, "Ω"],
+          ["Rp", "Rp (shunt)", 1, 30, 0.5, "Ω"],
+        ],
+        KEYS = {
+          ind: ["Vs", "R1", "R2", "RL"],
+          dep: ["Vs", "R1", "R2", "k", "RL"],
+          book: ["Is", "Vs", "Rm", "Rs", "Rp", "RL"],
+        };
+      /* Reset sliders to the defaults of the selected circuit, then rebuild the controls */
+      function defs() {
+        P =
+          mode == "ind"
+            ? { Vs: 24, R1: 6, R2: 12, k: 0, RL: 4 }
+            : mode == "dep"
+              ? { Vs: 12, R1: 4, R2: 2, k: 2, RL: 1.2 }
+              : { Vs: 12, Is: 2, Rm: 4, Rs: 8, Rp: 5, RL: 4 };
+        build();
+      }
+      function build() {
+        var h = "";
+        KEYS[mode]
+          .map(function (q) {
+            return SL.filter(function (s) {
+              return s[0] == q;
+            })[0];
+          })
+          .forEach(function (s) {
+            h +=
+              '<label class="sl"><span><b>' +
+              s[1] +
+              '</b><i id="v' +
+              s[0] +
+              '">' +
+              P[s[0]] +
+              " " +
+              s[5] +
+              '</i></span><input type="range" min="' +
+              s[2] +
+              '" max="' +
+              s[3] +
+              '" step="' +
+              s[4] +
+              '" value="' +
+              P[s[0]] +
+              '" data-k="' +
+              s[0] +
+              '"></label>';
+          });
+        $("sl").innerHTML = h;
+        [].forEach.call(document.querySelectorAll("input[type=range]"), function (e) {
+          e.oninput = function () {
+            var k = e.dataset.k;
+            P[k] = +e.value;
+            $("v" + k).textContent =
+              P[k] +
+              " " +
+              SL.filter(function (s) {
+                return s[0] == k;
+              })[0][5];
+            info();
+          };
+        });
+        info();
+      }
+      /* ===== 2. CIRCUIT MATHS =====
+   Textbook Example 4.11 (2 A source, 4 ohm + 12 V branch, 8 ohm x 2, 5 ohm shunt) */
+      function calcB(v) {
+        var Is = P.Is,
+          Vs = P.Vs,
+          Rm = P.Rm,
+          Rs2 = 2 * P.Rs,
+          Rp = P.Rp,
+          RL = P.RL,
+          Z = v == "short" ? 0 : v == "open" ? Rp : 1 / (1 / Rp + 1 / RL),
+          a = Is + Vs / Rm,
+          Vd = a / (1 / Rm + 1 / (Rs2 + Z)),
+          I2 = Vd / (Rs2 + Z),
+          Vab = I2 * Z,
+          Il = v == "open" ? 0 : v == "short" ? I2 : Vab / RL,
+          IN = a / (1 / Rm + 1 / Rs2) / Rs2,
+          RN = 1 / (1 / Rp + 1 / (Rm + Rs2)),
+          Vo = (a / (1 / Rm + 1 / (Rs2 + Rp)) / (Rs2 + Rp)) * Rp;
+        return {
+          Is: Is,
+          Im: (Vd - Vs) / Rm,
+          I2: I2,
+          Ip: Vab / Rp,
+          Il: Il,
+          IL: Il,
+          IN: IN,
+          RN: RN,
+          Voc: Vo,
+          ILn: (IN * RN) / (RN + RL),
+        };
+      }
+      /* Independent / dependent source circuits (v = "full", "open" or "short") */
+      function calc(v) {
+        if (mode == "book") return calcB(v);
+        var g = (1 + P.k) / P.R1,
+          IN = ((1 + P.k) * P.Vs) / P.R1,
+          RN = 1 / (g + 1 / P.R2),
+          Voc = IN * RN,
+          ILn = (IN * RN) / (RN + P.RL);
+        var Va = v == "open" ? Voc : v == "short" ? 0 : ILn * P.RL,
+          Ix = (P.Vs - Va) / P.R1,
+          IR2 = Va / P.R2,
+          IL = Ix - IR2 + P.k * Ix;
+        return { IN: IN, RN: RN, Voc: Voc, ILn: ILn, Va: Va, Ix: Ix, IR2: IR2, IL: IL };
+      }
+      /* ===== 3. RESULTS PANEL AND BUTTONS ===== */
+      function info() {
+        var F = calc("full"),
+          C = calc(view),
+          ok = Math.abs(F.IL - F.ILn) < 1e-9;
+        $("r1").innerHTML = "Original circuit: I<sub>L</sub> = <b>" + f2(F.IL) + " A</b>";
+        $("r2").innerHTML = "Norton equivalent: I<sub>L</sub> = <b>" + f2(F.ILn) + " A</b>";
+        $("mt").innerHTML = ok ? '<span class="ok">Match ✓</span>' : "No match";
+        $("eq").innerHTML =
+          "I<sub>N</sub> = " +
+          f2(F.IN) +
+          " A<br>V<sub>oc</sub> = " +
+          f2(F.Voc) +
+          " V<br>R<sub>N</sub> = V<sub>oc</sub> / I<sub>N</sub> = " +
+          f2(F.RN) +
+          " Ω";
+        $("cap").textContent =
+          view == "full"
+            ? "Full circuit with the load connected: " + f2(F.IL) + " A flows through RL."
+            : view == "open"
+              ? "Step 1 · load removed. The terminals are open, so the open-circuit voltage is " +
+                f2(F.Voc) +
+                " V."
+              : "Step 2 · load replaced by a wire. The short-circuit current is IN = " +
+                f2(F.IN) +
+                " A.";
+        $("t1").textContent =
+          view == "full"
+            ? "Original circuit"
+            : view == "open"
+              ? "Load removed"
+              : "Terminals shorted";
+      }
+      [].forEach.call(document.querySelectorAll("#modes button"), function (b) {
+        b.onclick = function () {
+          mode = b.dataset.m;
+          [].forEach.call(document.querySelectorAll("#modes button"), function (x) {
+            x.className = x == b ? "on" : "";
+          });
+          defs();
+        };
+      });
+      [].forEach.call(document.querySelectorAll("#views button"), function (b) {
+        b.onclick = function () {
+          view = b.dataset.v;
+          [].forEach.call(document.querySelectorAll("#views button"), function (x) {
+            x.className = x == b ? "on" : "";
+          });
+          info();
+        };
+      });
+      /* ===== 4. DRAWING HELPERS (canvas) ===== */
+      var c1 = $("c1"),
+        c2 = $("c2");
+      c1.width = c2.width = 960;
+      c1.height = c2.height = 600;
+      var X1 = c1.getContext("2d"),
+        X2 = c2.getContext("2d");
+      X1.scale(2, 2);
+      X2.scale(2, 2);
+      function col(n) {
+        return getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+      }
+      function zig(c, ax, ay, bx, by) {
+        var dx = bx - ax,
+          dy = by - ay,
+          L = Math.hypot(dx, dy),
+          nx = (-dy / L) * 7,
+          ny = (dx / L) * 7;
+        c.beginPath();
+        c.moveTo(ax, ay);
+        for (var i = 0; i < 6; i++) {
+          var t = (i + 0.5) / 6,
+            s = i % 2 ? 1 : -1;
+          c.lineTo(ax + dx * t + s * nx, ay + dy * t + s * ny);
+        }
+        c.lineTo(bx, by);
+        c.stroke();
+      }
+      function tx(c, s, x, y, co, a) {
+        c.font = "bold 15px system-ui,Arial,sans-serif";
+        c.fillStyle = co;
+        c.textAlign = a || "center";
+        c.fillText(s, x, y);
+      }
+      function scene(c, C, t, segs, comps, extra) {
+        c.clearRect(0, 0, 480, 300);
+        c.lineWidth = 2.5;
+        c.strokeStyle = C.fg;
+        segs.forEach(function (s) {
+          c.beginPath();
+          c.moveTo(s[0], s[1]);
+          c.lineTo(s[2], s[3]);
+          c.stroke();
+        });
+        var Z = [];
+        comps.forEach(function (o) {
+          var x = o.x,
+            y = o.y;
+          c.fillStyle = C.card;
+          c.lineWidth = 2.5;
+          if (o.t == "rh") {
+            Z.push([x - 40, y - 12, x + 40, y + 12]);
+            c.fillRect(x - 40, y - 10, 80, 20);
+            c.strokeStyle = C.amb;
+            zig(c, x - 40, y, x + 40, y);
+            tx(c, o.l, x, y - 16, C.amb);
+          }
+          if (o.t == "rv") {
+            Z.push([x - 12, y - 30, x + 12, y + 30]);
+            c.fillRect(x - 10, y - 30, 20, 60);
+            c.strokeStyle = o.c || C.amb;
+            zig(c, x, y - 30, x, y + 30);
+            tx(c, o.l, x - 14, y + 5, o.c || C.amb, "end");
+          }
+          if (o.t == "v" || o.t == "i" || o.t == "d") {
+            Z.push([x - 24, y - 24, x + 24, y + 24]);
+            c.strokeStyle = C.teal;
+            c.beginPath();
+            if (o.t == "d") {
+              c.moveTo(x, y - 22);
+              c.lineTo(x + 22, y);
+              c.lineTo(x, y + 22);
+              c.lineTo(x - 22, y);
+              c.closePath();
+            } else c.arc(x, y, 22, 0, 7);
+            c.fill();
+            c.stroke();
+            if (o.t == "v") tx(c, o.l, x, y + 5, C.teal);
+            else {
+              c.beginPath();
+              c.moveTo(x, y + 12);
+              c.lineTo(x, y - 12);
+              c.moveTo(x - 7, y - 4);
+              c.lineTo(x, y - 12);
+              c.lineTo(x + 7, y - 4);
+              c.stroke();
+              tx(c, o.l, o.o ? x + 28 : x, o.o ? y + 5 : y + 42, C.teal, o.o ? "start" : "center");
+            }
+          }
+        });
+        segs.forEach(function (s) {
+          var cur = s[4];
+          if (Math.abs(cur) < 1e-6) return;
+          var L = Math.hypot(s[2] - s[0], s[3] - s[1]),
+            n = Math.max(1, Math.round(L / 26)),
+            v = (cur < 0 ? -1 : 1) * 38 * Math.sqrt(Math.abs(cur));
+          for (var i = 0; i < n; i++) {
+            var u = (((i / n + (v * t) / L) % 1) + 1) % 1,
+              px = s[0] + (s[2] - s[0]) * u,
+              py = s[1] + (s[3] - s[1]) * u;
+            if (
+              Z.some(function (z) {
+                return px > z[0] && px < z[2] && py > z[1] && py < z[3];
+              })
+            )
+              continue;
+            c.fillStyle = C.dot;
+            c.beginPath();
+            c.arc(px, py, 4, 0, 7);
+            c.fill();
+          }
+        });
+        extra && extra(c, C);
+      }
+      /* ===== 5. SIMULATOR ANIMATION LOOP ===== */
+      function frame(ms) {
+        var t = ms / 1000,
+          C = {
+            bg: col("--bg"),
+            fg: col("--fg"),
+            card: col("--card"),
+            amb: col("--amb"),
+            teal: col("--teal"),
+            dot: col("--dot"),
+          },
+          A = calc(view),
+          F = calc("full"),
+          k = P.k;
+        var S = [
+          [50, 250, 50, 50, A.Ix],
+          [50, 50, 250, 50, A.Ix],
+          [250, 50, 330, 50, A.Ix - A.IR2],
+          [330, 50, 420, 50, A.IL],
+          [420, 250, 330, 250, A.IL],
+          [330, 250, 250, 250, A.IL - k * A.Ix],
+          [250, 250, 50, 250, A.Ix],
+          [250, 50, 250, 250, A.IR2],
+        ];
+        if (view != "open") S.push([420, 50, 420, 250, A.IL]);
+        if (k > 0) S.push([330, 250, 330, 50, k * A.Ix]);
+        var K = [
+          { t: "v", x: 50, y: 150, l: P.Vs + "V" },
+          { t: "rh", x: 150, y: 50, l: P.R1 + "Ω" },
+          { t: "rv", x: 250, y: 150, l: P.R2 + "Ω" },
+        ];
+        if (k > 0) K.push({ t: "d", x: 330, y: 150, l: k + "·Ix", o: 1 });
+        if (view == "full") K.push({ t: "rv", x: 420, y: 150, l: P.RL + "Ω", c: C.teal });
+        if (mode == "book") {
+          S = [
+            [40, 250, 40, 50, A.Is],
+            [40, 50, 120, 50, A.Is],
+            [120, 50, 310, 50, A.I2],
+            [120, 50, 120, 250, A.Im],
+            [310, 50, 310, 250, A.Ip],
+            [310, 50, 420, 50, A.Il],
+            [420, 250, 310, 250, A.Il],
+            [310, 250, 120, 250, A.I2],
+            [120, 250, 40, 250, A.Is],
+          ];
+          if (view != "open") S.push([420, 50, 420, 250, A.Il]);
+          K = [
+            { t: "i", x: 40, y: 150, l: P.Is + " A" },
+            { t: "rv", x: 120, y: 105, l: P.Rm + "Ω" },
+            { t: "v", x: 120, y: 195, l: P.Vs + "V" },
+            { t: "rh", x: 210, y: 50, l: P.Rs + "Ω" },
+            { t: "rh", x: 210, y: 250, l: P.Rs + "Ω" },
+            { t: "rv", x: 310, y: 150, l: P.Rp + "Ω" },
+          ];
+          if (view == "full") K.push({ t: "rv", x: 420, y: 150, l: P.RL + "Ω", c: C.teal });
+        }
+        scene(X1, C, t, S, K, function (c, C) {
+          tx(c, "a", 440, 54, C.fg);
+          tx(c, "b", 440, 254, C.fg);
+          if (view == "open") {
+            [50, 250].forEach(function (y) {
+              c.fillStyle = C.fg;
+              c.beginPath();
+              c.arc(420, y, 5, 0, 7);
+              c.fill();
+            });
+            tx(c, "Voc = " + f2(A.Voc) + " V", 385, 155, C.teal);
+          }
+          if (view == "short") tx(c, "IN = " + f2(A.IN) + " A", 385, 155, C.teal);
+        });
+        var N = [
+          [80, 250, 80, 50, F.IN],
+          [80, 50, 250, 50, F.IN],
+          [250, 50, 420, 50, F.ILn],
+          [250, 50, 250, 250, F.IN - F.ILn],
+          [420, 50, 420, 250, F.ILn],
+          [420, 250, 250, 250, F.ILn],
+          [250, 250, 80, 250, F.IN],
+        ];
+        scene(
+          X2,
+          C,
+          t,
+          N,
+          [
+            { t: "i", x: 80, y: 150, l: f2(F.IN) + " A" },
+            { t: "rv", x: 250, y: 150, l: f2(F.RN) + "Ω" },
+            { t: "rv", x: 420, y: 150, l: P.RL + "Ω", c: C.teal },
+          ],
+          function (c, C) {
+            tx(c, "a", 440, 54, C.fg);
+            tx(c, "b", 440, 254, C.fg);
+          },
+        );
+        requestAnimationFrame(frame);
+      }
+      defs();
+      requestAnimationFrame(frame);
 
-var SS=document.querySelectorAll('.slide'),ix=0;function go(n){ix=Math.max(0,Math.min(SS.length-1,n));[].forEach.call(SS,function(e,j){e.className='slide'+(j==ix?' on':'')});$('ct').textContent=(ix+1)+' / '+SS.length;window.scrollTo(0,0)}
-$('pv').onclick=function(){go(ix-1)};$('nx').onclick=function(){go(ix+1)};document.addEventListener('keydown',function(e){if(e.target.tagName=='INPUT')return;if(e.key=='ArrowRight')go(ix+1);if(e.key=='ArrowLeft')go(ix-1)});go(0);
-var bkS=1,bkL=0,BX=$('bk').getContext('2d');BX.scale(2,2);
-function bkSel(n){bkS=n;[].forEach.call(document.querySelectorAll('#bks button'),function(b,k){b.className=k+1==n?'on':''})}
-[].forEach.call(document.querySelectorAll('#bks button'),function(b,k){b.onclick=function(){bkSel(k+1)}});bkSel(1);
-function bk(v){var m=mode,p=P;mode='book';P={Is:2,Vs:12,Rm:4,Rs:8,Rp:5,RL:4};var r=calcB(v);mode=m;P=p;return r}
-var BH=['Step 1 · Remove the load','Step 2 · Find R_N with the sources off','Step 3 · Find I_N by shorting a–b','Step 4 · Find the load current'];
-function bkf(ms){if($('bk').offsetParent){var t=ms/1000,n=bkS,v=n==1?'open':n==3?'short':'full',A=bk(v),F=bk('full'),z=function(x){return n==2?0:x},
-C={fg:col('--fg'),card:col('--card'),amb:col('--amb'),teal:col('--teal'),dot:col('--dot')};
-if(bkL!=n){bkL=n;$('bkh').textContent=BH[n-1];$('bkt').innerHTML=[
-'Take R<sub>L</sub> out and leave a and b open. The open-circuit voltage across the terminals is V<sub>oc</sub> = '+f2(F.Voc)+' V.',
-'Open the 2 A current source and replace the 12 V source with a wire. R<sub>N</sub> = 5 ∥ (8 + 4 + 8) = 5 ∥ 20 = '+f2(F.RN)+' Ω.',
-'Short a–b. The 5 Ω is bypassed. Mesh analysis gives i<sub>2</sub> = 1 A, so I<sub>N</sub> = '+f2(F.IN)+' A.',
-'Draw '+f2(F.IN)+' A ∥ '+f2(F.RN)+' Ω and reconnect R<sub>L</sub> = 4 Ω. I<sub>L</sub> = '+f2(F.IN)+' × '+f2(F.RN)+' / ('+f2(F.RN)+' + 4) = '+f2(F.ILn)+' A.'][n-1]}
-if(n==4){scene(BX,C,t,[[80,250,80,50,F.IN],[80,50,250,50,F.IN],[250,50,420,50,F.ILn],[250,50,250,250,F.IN-F.ILn],[420,50,420,250,F.ILn],[420,250,250,250,F.ILn],[250,250,80,250,F.IN]],[{t:'i',x:80,y:150,l:f2(F.IN)+' A'},{t:'rv',x:250,y:150,l:f2(F.RN)+'Ω'},{t:'rv',x:420,y:150,l:'4Ω',c:C.teal}],function(c){tx(c,'a',440,54,C.fg);tx(c,'b',440,254,C.fg)})}
-else{var S=[[40,50,120,50,z(A.Is)],[120,50,310,50,z(A.I2)],[120,50,120,250,z(A.Im)],[310,50,310,250,z(A.Ip)],[310,50,420,50,z(A.Il)],[420,250,310,250,z(A.Il)],[310,250,120,250,z(A.I2)],[120,250,40,250,z(A.Is)]];
-if(n!=2)S.push([40,250,40,50,A.Is]);if(n==3)S.push([420,50,420,250,A.Il]);
-var K=[{t:'rv',x:120,y:105,l:'4Ω'},{t:'rh',x:210,y:50,l:'8Ω'},{t:'rh',x:210,y:250,l:'8Ω'},{t:'rv',x:310,y:150,l:'5Ω'}];if(n!=2){K.push({t:'i',x:40,y:150,l:'2 A'});K.push({t:'v',x:120,y:195,l:'12V'})}
-scene(BX,C,t,S,K,function(c){tx(c,'a',440,54,C.fg);tx(c,'b',440,254,C.fg);
-if(n!=3)[50,250].forEach(function(y){c.fillStyle=C.fg;c.beginPath();c.arc(420,y,5,0,7);c.fill()});
-if(n==1)tx(c,'Voc = '+f2(A.Voc)+' V',385,155,C.teal);if(n==3)tx(c,'IN = '+f2(A.IN)+' A',385,155,C.teal);
-if(n==2){tx(c,'RN = '+f2(F.RN)+' Ω',385,155,C.teal);tx(c,'open',40,155,C.teal);tx(c,'wire',160,200,C.teal);[50,250].forEach(function(y){c.fillStyle=C.fg;c.beginPath();c.arc(40,y,5,0,7);c.fill()})}})}}
-requestAnimationFrame(bkf)}requestAnimationFrame(bkf);
-</script></body></html>
+      /* ===== 6. SLIDE NAVIGATION ===== */
+      var SS = document.querySelectorAll(".slide"),
+        ix = 0;
+      function go(n) {
+        ix = Math.max(0, Math.min(SS.length - 1, n));
+        [].forEach.call(SS, function (e, j) {
+          e.className = "slide" + (j == ix ? " on" : "");
+        });
+        $("ct").textContent = ix + 1 + " / " + SS.length;
+        window.scrollTo(0, 0);
+      }
+      $("pv").onclick = function () {
+        go(ix - 1);
+      };
+      $("nx").onclick = function () {
+        go(ix + 1);
+      };
+      document.addEventListener("keydown", function (e) {
+        if (e.target.tagName == "INPUT") return;
+        if (e.key == "ArrowRight") go(ix + 1);
+        if (e.key == "ArrowLeft") go(ix - 1);
+      });
+      go(0);
+      /* ===== 7. STEP-BY-STEP BREAKDOWN SLIDE ===== */
+      var bkS = 1,
+        bkL = 0,
+        BX = $("bk").getContext("2d");
+      BX.scale(2, 2);
+      function bkSel(n) {
+        bkS = n;
+        [].forEach.call(document.querySelectorAll("#bks button"), function (b, k) {
+          b.className = k + 1 == n ? "on" : "";
+        });
+      }
+      [].forEach.call(document.querySelectorAll("#bks button"), function (b, k) {
+        b.onclick = function () {
+          bkSel(k + 1);
+        };
+      });
+      bkSel(1);
+      function bk(v) {
+        var m = mode,
+          p = P;
+        mode = "book";
+        P = { Is: 2, Vs: 12, Rm: 4, Rs: 8, Rp: 5, RL: 4 };
+        var r = calcB(v);
+        mode = m;
+        P = p;
+        return r;
+      }
+      var BH = [
+        "Step 1 · Remove the load",
+        "Step 2 · Find R_N with the sources off",
+        "Step 3 · Find I_N by shorting a–b",
+        "Step 4 · Find the load current",
+      ];
+      function bkf(ms) {
+        if ($("bk").offsetParent) {
+          var t = ms / 1000,
+            n = bkS,
+            v = n == 1 ? "open" : n == 3 ? "short" : "full",
+            A = bk(v),
+            F = bk("full"),
+            z = function (x) {
+              return n == 2 ? 0 : x;
+            },
+            C = {
+              fg: col("--fg"),
+              card: col("--card"),
+              amb: col("--amb"),
+              teal: col("--teal"),
+              dot: col("--dot"),
+            };
+          if (bkL != n) {
+            bkL = n;
+            $("bkh").textContent = BH[n - 1];
+            $("bkt").innerHTML = [
+              "Take R<sub>L</sub> out and leave a and b open. The open-circuit voltage across the terminals is V<sub>oc</sub> = " +
+                f2(F.Voc) +
+                " V.",
+              "Open the 2 A current source and replace the 12 V source with a wire. R<sub>N</sub> = 5 ∥ (8 + 4 + 8) = 5 ∥ 20 = " +
+                f2(F.RN) +
+                " Ω.",
+              "Short a–b. The 5 Ω is bypassed. Mesh analysis gives i<sub>2</sub> = 1 A, so I<sub>N</sub> = " +
+                f2(F.IN) +
+                " A.",
+              "Draw " +
+                f2(F.IN) +
+                " A ∥ " +
+                f2(F.RN) +
+                " Ω and reconnect R<sub>L</sub> = 4 Ω. I<sub>L</sub> = " +
+                f2(F.IN) +
+                " × " +
+                f2(F.RN) +
+                " / (" +
+                f2(F.RN) +
+                " + 4) = " +
+                f2(F.ILn) +
+                " A.",
+            ][n - 1];
+          }
+          if (n == 4) {
+            scene(
+              BX,
+              C,
+              t,
+              [
+                [80, 250, 80, 50, F.IN],
+                [80, 50, 250, 50, F.IN],
+                [250, 50, 420, 50, F.ILn],
+                [250, 50, 250, 250, F.IN - F.ILn],
+                [420, 50, 420, 250, F.ILn],
+                [420, 250, 250, 250, F.ILn],
+                [250, 250, 80, 250, F.IN],
+              ],
+              [
+                { t: "i", x: 80, y: 150, l: f2(F.IN) + " A" },
+                { t: "rv", x: 250, y: 150, l: f2(F.RN) + "Ω" },
+                { t: "rv", x: 420, y: 150, l: "4Ω", c: C.teal },
+              ],
+              function (c) {
+                tx(c, "a", 440, 54, C.fg);
+                tx(c, "b", 440, 254, C.fg);
+              },
+            );
+          } else {
+            var S = [
+              [40, 50, 120, 50, z(A.Is)],
+              [120, 50, 310, 50, z(A.I2)],
+              [120, 50, 120, 250, z(A.Im)],
+              [310, 50, 310, 250, z(A.Ip)],
+              [310, 50, 420, 50, z(A.Il)],
+              [420, 250, 310, 250, z(A.Il)],
+              [310, 250, 120, 250, z(A.I2)],
+              [120, 250, 40, 250, z(A.Is)],
+            ];
+            if (n != 2) S.push([40, 250, 40, 50, A.Is]);
+            if (n == 3) S.push([420, 50, 420, 250, A.Il]);
+            var K = [
+              { t: "rv", x: 120, y: 105, l: "4Ω" },
+              { t: "rh", x: 210, y: 50, l: "8Ω" },
+              { t: "rh", x: 210, y: 250, l: "8Ω" },
+              { t: "rv", x: 310, y: 150, l: "5Ω" },
+            ];
+            if (n != 2) {
+              K.push({ t: "i", x: 40, y: 150, l: "2 A" });
+              K.push({ t: "v", x: 120, y: 195, l: "12V" });
+            }
+            scene(BX, C, t, S, K, function (c) {
+              tx(c, "a", 440, 54, C.fg);
+              tx(c, "b", 440, 254, C.fg);
+              if (n != 3)
+                [50, 250].forEach(function (y) {
+                  c.fillStyle = C.fg;
+                  c.beginPath();
+                  c.arc(420, y, 5, 0, 7);
+                  c.fill();
+                });
+              if (n == 1) tx(c, "Voc = " + f2(A.Voc) + " V", 385, 155, C.teal);
+              if (n == 3) tx(c, "IN = " + f2(A.IN) + " A", 385, 155, C.teal);
+              if (n == 2) {
+                tx(c, "RN = " + f2(F.RN) + " Ω", 385, 155, C.teal);
+                tx(c, "open", 40, 155, C.teal);
+                tx(c, "wire", 160, 200, C.teal);
+                [50, 250].forEach(function (y) {
+                  c.fillStyle = C.fg;
+                  c.beginPath();
+                  c.arc(40, y, 5, 0, 7);
+                  c.fill();
+                });
+              }
+            });
+          }
+        }
+        requestAnimationFrame(bkf);
+      }
+      requestAnimationFrame(bkf);
+    </script>
+  </body>
+</html>
