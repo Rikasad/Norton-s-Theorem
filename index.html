@@ -135,7 +135,17 @@
         color: var(--fg);
         font-weight: 600;
       }
-      /* ===== SLIDES, TABLES AND NAVIGATION BAR ===== */
+      /* ===== CIRCUIT FIGURES (inline SVG, follow the light/dark theme) ===== */
+.dg{width:100%;height:auto;display:block}
+.dg .w{fill:none;stroke:var(--fg);stroke-width:5;stroke-linecap:round}
+.dg .ts{fill:none;stroke:var(--teal);stroke-width:9}.dg .tl{fill:none;stroke:var(--teal);stroke-width:5}
+.dg .ra{fill:var(--card);stroke:var(--amb);stroke-width:5}.dg .rt{fill:var(--card);stroke:var(--teal);stroke-width:5}
+.dg .cs{fill:var(--card);stroke:var(--teal);stroke-width:5}.dg .bx{fill:var(--card);stroke:var(--amb);stroke-width:4}
+.dg .dt{fill:var(--fg)}.dg .ah{fill:var(--amb)}
+.dg text{font-family:system-ui,Arial,sans-serif;font-weight:700}
+.dg .tf{fill:var(--fg)}.dg .ta{fill:var(--amb)}.dg .tt{fill:var(--teal)}.dg .tm{fill:var(--mut);font-weight:400}
+ol.st{margin:6px 0 0;padding-left:20px}ol.st li{margin:8px 0;color:var(--fg)}
+/* ===== SLIDES, TABLES AND NAVIGATION BAR ===== */
       .slide {
         display: none;
       }
@@ -201,30 +211,7 @@
       </h1>
     </section>
     <!-- Slide 2: The theorem -->
-    <section class="slide">
-      <p class="kick">THE THEOREM</p>
-      <h2>A linear and bidirectional two-terminal network can be replaced by an equivalent circuit consisting of a Current source I<sub>N</sub> in parallel with a resistor R<sub>N</sub></h2>
-      <div class="grid">
-        <div class="card">
-          <h3>Norton current I<sub>N</sub></h3>
-          <p>The current through a short circuit placed across the two terminals.</p>
-        </div>
-        <div class="card">
-          <h3>Norton resistance R<sub>N</sub></h3>
-          <p>The resistance seen from the terminals with all independent sources turned off.</p>
-        </div>
-        <div class="card">
-          <h3>Equivalent</h3>
-          <p>
-            I<sub>N</sub> in parallel with R<sub>N</sub> behaves identically at the terminals for
-            any load.
-          </p>
-        </div>
-      </div>
-      <p>
-        Turning sources off: voltage sources become shorts, current sources become open circuits.
-      </p>
-    </section>
+    <section class="slide"><p class="kick">THE THEOREM</p><h2>Any linear two-terminal network has a Norton equivalent</h2><div class="card"><svg class="dg" viewBox="0 0 700 260" role="img" aria-label="Linear network is equivalent to a current source in parallel with a resistor"><rect class="bx" x="10" y="40" width="200" height="180" rx="14"/><text x="110" y="125" class="tf" font-size="24" text-anchor="middle">Linear network</text><text x="110" y="155" class="tm" font-size="17" text-anchor="middle">sources + resistors</text><path class="w" d="M210 90H280M210 190H280"/><circle class="dt" cx="280" cy="90" r="6"/><circle class="dt" cx="280" cy="190" r="6"/><text x="296" y="96" class="tf" font-size="22" text-anchor="start">a</text><text x="296" y="196" class="tf" font-size="22" text-anchor="start">b</text><path class="ts" d="M330 140H410"/><polygon class="ah" points="410,128 432,140 410,152"/><text x="381" y="120" class="ta" font-size="18" text-anchor="middle">equivalent</text><path class="w" d="M480 90H640M480 190H640M540 90V106M540 174V190M620 90V108M620 172V190"/><circle class="dt" cx="480" cy="90" r="6"/><circle class="dt" cx="480" cy="190" r="6"/><circle class="cs" cx="540" cy="140" r="34"/><path class="tl" d="M540 158V122M528 134L540 122L552 134"/><rect class="ra" x="606" y="108" width="28" height="64"/><text x="540" y="226" class="tt" font-size="22" text-anchor="middle">I<tspan dy="7" font-size="70%">N</tspan></text><text x="656" y="146" class="ta" font-size="22" text-anchor="start">R<tspan dy="7" font-size="70%">N</tspan></text><text x="466" y="96" class="tf" font-size="22" text-anchor="end">a</text><text x="466" y="196" class="tf" font-size="22" text-anchor="end">b</text></svg></div><div class="grid"><div class="card"><h3>Norton current I<sub>N</sub></h3><p>The current through a short circuit placed across the two terminals.</p></div><div class="card"><h3>Norton resistance R<sub>N</sub></h3><p>The resistance seen from the terminals with all independent sources turned off.</p></div><div class="card"><h3>Equivalent</h3><p>I<sub>N</sub> in parallel with R<sub>N</sub> behaves identically at the terminals for any load.</p></div></div><p>Turning sources off: voltage sources become shorts, current sources become open circuits.</p></section>
     <!-- Slide 3: The four steps -->
     <section class="slide">
       <p class="kick">STEP BY STEP</p>
@@ -306,90 +293,11 @@
       </p>
     </section>
     <!-- Slide 5: Same circuit, four methods -->
-    <section class="slide">
-      <p class="kick">SAME CIRCUIT · FOUR METHODS</p>
-      <h2>All give I<sub>N</sub> = 1.5 A</h2>
-      <p>
-        12 V source, R1 = 2 Ω, node X with R3 = 4 Ω to ground, R2 = 4 Ω to terminal a. Short a–b.
-      </p>
-      <div class="grid">
-        <div class="card">
-          <h3>Nodal</h3>
-          <p>KCL at X: (12 − V) / 2 = V / 4 + V / 4, so V = 6 V. I<sub>N</sub> = 6 / 4 = 1.5 A.</p>
-        </div>
-        <div class="card">
-          <h3>Mesh</h3>
-          <p>
-            12 = 2I<sub>1</sub> + 4(I<sub>1</sub> − I<sub>2</sub>), 0 = 4I<sub>2</sub> + 4(I<sub
-              >2</sub
-            >
-            − I<sub>1</sub>). I<sub>1</sub> = 3 A, so I<sub>N</sub> = I<sub>2</sub> = 1.5 A.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Source transformation</h3>
-          <p>
-            12 V with 2 Ω becomes 6 A ∥ 2 Ω. The 6 A splits by conductance (0.5, 0.25, 0.25 S): the
-            short takes 1.5 A.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Thévenin conversion</h3>
-          <p>V<sub>Th</sub> = 8 V, R<sub>Th</sub> = 16/3 Ω. I<sub>N</sub> = 8 / (16/3) = 1.5 A.</p>
-        </div>
-      </div>
-    </section>
+    <section class="slide"><p class="kick">SAME CIRCUIT · FOUR METHODS</p><h2>All give I<sub>N</sub> = 1.5 A</h2><div class="card"><svg class="dg" viewBox="0 0 760 190" role="img" aria-label="Circuit for the four methods"><circle class="cs" cx="60" cy="98" r="34"/><text x="60" y="106" class="tt" font-size="26" text-anchor="middle">12V</text><path class="w" d="M60 64V45H140M240 45H400M500 45H640M330 45V70M330 126V150M60 132V150H640"/><rect class="ra" x="140" y="29" width="100" height="32"/><rect class="ra" x="308" y="70" width="44" height="56"/><rect class="ra" x="400" y="29" width="100" height="32"/><text x="190" y="20" class="ta" font-size="24" text-anchor="middle">R1 2Ω</text><text x="296" y="106" class="ta" font-size="24" text-anchor="end">R3 4Ω</text><text x="450" y="20" class="ta" font-size="24" text-anchor="middle">R2 4Ω</text><text x="348" y="38" class="tf" font-size="24" text-anchor="start">X</text><circle class="dt" cx="640" cy="45" r="8"/><circle class="dt" cx="640" cy="150" r="8"/><text x="665" y="55" class="tf" font-size="24" text-anchor="start">a</text><text x="665" y="160" class="tf" font-size="24" text-anchor="start">b</text></svg></div><p>12 V source, R1 = 2 Ω, node X with R3 = 4 Ω to ground, R2 = 4 Ω to terminal a. Short a–b.</p><div class="grid"><div class="card"><h3>Nodal</h3><p>KCL at X: (12 − V) / 2 = V / 4 + V / 4, so V = 6 V. I<sub>N</sub> = 6 / 4 = 1.5 A.</p></div><div class="card"><h3>Mesh</h3><p>12 = 2I<sub>1</sub> + 4(I<sub>1</sub> − I<sub>2</sub>), 0 = 4I<sub>2</sub> + 4(I<sub>2</sub> − I<sub>1</sub>). I<sub>1</sub> = 3 A, so I<sub>N</sub> = I<sub>2</sub> = 1.5 A.</p></div><div class="card"><h3>Source transformation</h3><p>12 V with 2 Ω becomes 6 A ∥ 2 Ω. The 6 A splits by conductance (0.5, 0.25, 0.25 S): the short takes 1.5 A.</p></div><div class="card"><h3>Thévenin conversion</h3><p>V<sub>Th</sub> = 8 V, R<sub>Th</sub> = 16/3 Ω. I<sub>N</sub> = 8 / (16/3) = 1.5 A.</p></div></div></section>
     <!-- Slide 6: Example 1: independent source -->
-    <section class="slide">
-      <p class="kick">EXAMPLE 1 · INDEPENDENT SOURCE</p>
-      <h2>24 V, 6 Ω in series, 12 Ω shunt, 4 Ω load</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>1 · Original</h3>
-          <p>Load R<sub>L</sub> = 4 Ω across a–b.</p>
-        </div>
-        <div class="card">
-          <h3>2 · Find I<sub>N</sub></h3>
-          <p>Short a–b. The 12 Ω is bypassed, so I<sub>N</sub> = 24 / 6 = 4 A.</p>
-        </div>
-        <div class="card">
-          <h3>3 · Find R<sub>N</sub></h3>
-          <p>Short the source. R<sub>N</sub> = 6 ∥ 12 = 4 Ω.</p>
-        </div>
-        <div class="card">
-          <h3>4 · Load current</h3>
-          <p>I<sub>L</sub> = 4 × 4 / (4 + 4) = 2 A.</p>
-        </div>
-      </div>
-    </section>
+    <section class="slide"><p class="kick">EXAMPLE 1 · INDEPENDENT SOURCE</p><h2>24 V, 6 Ω in series, 12 Ω shunt, 4 Ω load</h2><div class="grid"><div class="card"><h3>1 · Original</h3><svg class="dg" viewBox="0 0 860 400" role="img" aria-label="Example 1 circuit, load"><path class="w" d="M80 156V100H200M320 100H620M520 100V160M520 240V300M80 244V300H620M620 100H760M620 300H760M760 100V160M760 240V300"/><circle class="cs" cx="80" cy="200" r="44"/><text x="80" y="214" class="tt" font-size="40" text-anchor="middle">24V</text><rect class="ra" x="200" y="80" width="120" height="40"/><rect class="ra" x="495" y="160" width="50" height="80"/><text x="260" y="60" class="ta" font-size="40" text-anchor="middle">6Ω</text><text x="470" y="212" class="ta" font-size="40" text-anchor="end">12Ω</text><rect class="rt" x="735" y="160" width="50" height="80"/><text x="710" y="212" class="tt" font-size="40" text-anchor="end">4Ω</text></svg><p>Load R<sub>L</sub> = 4 Ω across a–b.</p></div><div class="card"><h3>2 · Find I<sub>N</sub></h3><svg class="dg" viewBox="0 0 860 400" role="img" aria-label="Example 1 circuit, short"><path class="w" d="M80 156V100H200M320 100H620M520 100V160M520 240V300M80 244V300H620"/><circle class="cs" cx="80" cy="200" r="44"/><text x="80" y="214" class="tt" font-size="40" text-anchor="middle">24V</text><rect class="ra" x="200" y="80" width="120" height="40"/><rect class="ra" x="495" y="160" width="50" height="80"/><text x="260" y="60" class="ta" font-size="40" text-anchor="middle">6Ω</text><text x="470" y="212" class="ta" font-size="40" text-anchor="end">12Ω</text><path class="ts" d="M620 100V300"/><text x="650" y="212" class="tt" font-size="38" text-anchor="start">I<tspan dy="7" font-size="70%">N</tspan><tspan dy="-7"> = 4 A</tspan></text><circle class="dt" cx="620" cy="100" r="9"/><circle class="dt" cx="620" cy="300" r="9"/><text x="650" y="112" class="tf" font-size="34" text-anchor="start">a</text><text x="650" y="312" class="tf" font-size="34" text-anchor="start">b</text></svg><p>Remove R<sub>L</sub> and short a–b. The 12 Ω is bypassed, so I<sub>N</sub> = 24 / 6 = 4 A.</p></div><div class="card"><h3>3 · Find R<sub>N</sub></h3><svg class="dg" viewBox="0 0 860 400" role="img" aria-label="Example 1 circuit, off"><path class="w" d="M80 100H200M320 100H620M520 100V160M520 240V300M80 100V300H620"/><rect class="ra" x="200" y="80" width="120" height="40"/><rect class="ra" x="495" y="160" width="50" height="80"/><text x="260" y="60" class="ta" font-size="40" text-anchor="middle">6Ω</text><text x="470" y="212" class="ta" font-size="40" text-anchor="end">12Ω</text><circle class="dt" cx="620" cy="100" r="9"/><circle class="dt" cx="620" cy="300" r="9"/><text x="650" y="112" class="tf" font-size="34" text-anchor="start">a</text><text x="650" y="312" class="tf" font-size="34" text-anchor="start">b</text></svg><p>Short the voltage source. R<sub>N</sub> = 6 ∥ 12 = 4 Ω.</p></div><div class="card"><h3>4 · Load current</h3><svg class="dg" viewBox="0 0 860 400" role="img" aria-label="Norton equivalent of example 1"><path class="w" d="M120 100H540M120 300H540M120 100V156M120 244V300M330 100V160M330 240V300M540 100V160M540 240V300"/><circle class="cs" cx="120" cy="200" r="44"/><path class="tl" d="M120 225V175M105 190L120 175L135 190"/><rect class="ra" x="305" y="160" width="50" height="80"/><rect class="rt" x="515" y="160" width="50" height="80"/><text x="120" y="70" class="tt" font-size="34" text-anchor="middle">I<tspan dy="7" font-size="70%">N</tspan><tspan dy="-7"> = 4 A</tspan></text><text x="330" y="70" class="ta" font-size="34" text-anchor="middle">R<tspan dy="7" font-size="70%">N</tspan><tspan dy="-7"> = 4Ω</tspan></text><text x="540" y="70" class="tt" font-size="34" text-anchor="middle">R<tspan dy="7" font-size="70%">L</tspan><tspan dy="-7"> = 4Ω</tspan></text></svg><p>Draw 4 A ∥ 4 Ω and reconnect R<sub>L</sub>. I<sub>L</sub> = 4 × 4 / (4 + 4) = 2 A.</p></div></div></section>
     <!-- Slide 7: Example 2: dependent source -->
-    <section class="slide">
-      <p class="kick">EXAMPLE 2 · DEPENDENT SOURCE</p>
-      <h2>12 V, 4 Ω, 2 Ω, dependent source 2·I<sub>x</sub>, load 1.2 Ω</h2>
-      <p>I<sub>x</sub> is the current in the 4 Ω. The dependent source stays in the circuit.</p>
-      <div class="grid">
-        <div class="card">
-          <h3>I<sub>N</sub> = 9 A</h3>
-          <p>
-            Short a–b: the 2 Ω carries nothing. I<sub>x</sub> = 12 / 4 = 3 A, the source gives 6 A,
-            so I<sub>N</sub> = 3 + 6.
-          </p>
-        </div>
-        <div class="card">
-          <h3>V<sub>oc</sub> = 7.2 V</h3>
-          <p>
-            KCL at a: I<sub>x</sub> + 2I<sub>x</sub> = V<sub>a</sub> / 2 with I<sub>x</sub> = (12 −
-            V<sub>a</sub>) / 4.
-          </p>
-        </div>
-        <div class="card">
-          <h3>R<sub>N</sub> = 0.8 Ω</h3>
-          <p>
-            V<sub>oc</sub> / I<sub>N</sub> = 7.2 / 9. Then I<sub>L</sub> = 9 × 0.8 / 2.0 = 3.6 A.
-          </p>
-        </div>
-      </div>
-    </section>
+    <section class="slide"><p class="kick">EXAMPLE 2 · DEPENDENT SOURCE</p><h2>12 V, 4 Ω, 2 Ω, dependent source 2·I<sub>x</sub>, load 1.2 Ω</h2><p>I<sub>x</sub> is the current in the 4 Ω. The dependent source (diamond) stays in the circuit.</p><div class="grid"><div class="card"><h3>The circuit</h3><svg class="dg" viewBox="0 0 1100 400" role="img" aria-label="Dependent source circuit, load"><path class="w" d="M80 156V100H200M320 100H780M470 100V160M470 240V300M620 100V150M620 250V300M80 244V300H780M780 100H900M780 300H900M900 100V160M900 240V300"/><circle class="cs" cx="80" cy="200" r="44"/><text x="80" y="214" class="tt" font-size="40" text-anchor="middle">12V</text><rect class="ra" x="200" y="80" width="120" height="40"/><rect class="ra" x="445" y="160" width="50" height="80"/><text x="260" y="60" class="ta" font-size="40" text-anchor="middle">4Ω</text><text x="260" y="160" class="tf" font-size="34" text-anchor="middle">I<tspan dy="7" font-size="70%">x</tspan><tspan dy="-7"> →</tspan></text><text x="430" y="212" class="ta" font-size="40" text-anchor="end">2Ω</text><path class="cs" d="M620 150L660 200L620 250L580 200Z"/><path class="tl" d="M620 228V176M606 190L620 176L634 190"/><text x="672" y="212" class="tt" font-size="38" text-anchor="start">2·I<tspan dy="7" font-size="70%">x</tspan></text><rect class="rt" x="875" y="160" width="50" height="80"/><text x="900" y="145" class="tt" font-size="34" text-anchor="middle">R<tspan dy="7" font-size="70%">L</tspan><tspan dy="-7"> = 1.2Ω</tspan></text></svg></div><div class="card"><h3>Procedure</h3><ol class="st"><li><b>Given:</b> V<sub>s</sub> = 12 V, 4 Ω carrying I<sub>x</sub>, 2 Ω, a dependent current source 2·I<sub>x</sub> pushing into node a, and R<sub>L</sub> = 1.2 Ω.</li><li><b>Rule:</b> the dependent source stays in the circuit. Never turn it off.</li><li><b>Step 1, remove the load:</b> take out R<sub>L</sub> and leave a and b open.</li><li><b>Step 2, find I<sub>N</sub>:</b> short a–b. The 2 Ω has 0 V, so no current. I<sub>x</sub> = 12 / 4 = 3 A and the dependent source gives 2 × 3 = 6 A, so I<sub>N</sub> = 3 + 6 = 9 A.</li><li><b>Step 3, find R<sub>N</sub>:</b> open a–b. KCL at a: I<sub>x</sub> + 2I<sub>x</sub> = V<sub>a</sub> / 2 with I<sub>x</sub> = (12 − V<sub>a</sub>) / 4, so 3(12 − V<sub>a</sub>) / 4 = V<sub>a</sub> / 2 and V<sub>oc</sub> = V<sub>a</sub> = 7.2 V. Then R<sub>N</sub> = V<sub>oc</sub> / I<sub>N</sub> = 7.2 / 9 = 0.8 Ω.</li><li><b>Step 4, find the load current:</b> draw 9 A ∥ 0.8 Ω and reconnect R<sub>L</sub> = 1.2 Ω. I<sub>L</sub> = 9 × 0.8 / (0.8 + 1.2) = 3.6 A.</li></ol></div></div><h2 style="margin-top:16px">Step-by-step circuit breakdown</h2><div class="grid"><div class="card"><h3>1 · Original</h3><svg class="dg" viewBox="0 0 1100 400" role="img" aria-label="Dependent source circuit, load"><path class="w" d="M80 156V100H200M320 100H780M470 100V160M470 240V300M620 100V150M620 250V300M80 244V300H780M780 100H900M780 300H900M900 100V160M900 240V300"/><circle class="cs" cx="80" cy="200" r="44"/><text x="80" y="214" class="tt" font-size="40" text-anchor="middle">12V</text><rect class="ra" x="200" y="80" width="120" height="40"/><rect class="ra" x="445" y="160" width="50" height="80"/><text x="260" y="60" class="ta" font-size="40" text-anchor="middle">4Ω</text><text x="260" y="160" class="tf" font-size="34" text-anchor="middle">I<tspan dy="7" font-size="70%">x</tspan><tspan dy="-7"> →</tspan></text><text x="430" y="212" class="ta" font-size="40" text-anchor="end">2Ω</text><path class="cs" d="M620 150L660 200L620 250L580 200Z"/><path class="tl" d="M620 228V176M606 190L620 176L634 190"/><text x="672" y="212" class="tt" font-size="38" text-anchor="start">2·I<tspan dy="7" font-size="70%">x</tspan></text><rect class="rt" x="875" y="160" width="50" height="80"/><text x="900" y="145" class="tt" font-size="34" text-anchor="middle">R<tspan dy="7" font-size="70%">L</tspan><tspan dy="-7"> = 1.2Ω</tspan></text></svg><p>Dependent source 2·I<sub>x</sub>, load 1.2 Ω.</p></div><div class="card"><h3>2 · Short a–b: I<sub>N</sub></h3><svg class="dg" viewBox="0 0 1100 400" role="img" aria-label="Dependent source circuit, short"><path class="w" d="M80 156V100H200M320 100H780M470 100V160M470 240V300M620 100V150M620 250V300M80 244V300H780"/><circle class="cs" cx="80" cy="200" r="44"/><text x="80" y="214" class="tt" font-size="40" text-anchor="middle">12V</text><rect class="ra" x="200" y="80" width="120" height="40"/><rect class="ra" x="445" y="160" width="50" height="80"/><text x="260" y="60" class="ta" font-size="40" text-anchor="middle">4Ω</text><text x="260" y="160" class="tf" font-size="34" text-anchor="middle">I<tspan dy="7" font-size="70%">x</tspan><tspan dy="-7"> →</tspan></text><text x="430" y="212" class="ta" font-size="40" text-anchor="end">2Ω</text><path class="cs" d="M620 150L660 200L620 250L580 200Z"/><path class="tl" d="M620 228V176M606 190L620 176L634 190"/><text x="672" y="212" class="tt" font-size="38" text-anchor="start">2·I<tspan dy="7" font-size="70%">x</tspan></text><path class="ts" d="M780 100V300"/><text x="810" y="212" class="tt" font-size="38" text-anchor="start">I<tspan dy="7" font-size="70%">N</tspan><tspan dy="-7"> = 9 A</tspan></text><circle class="dt" cx="780" cy="100" r="9"/><circle class="dt" cx="780" cy="300" r="9"/><text x="810" y="112" class="tf" font-size="34" text-anchor="start">a</text><text x="810" y="312" class="tf" font-size="34" text-anchor="start">b</text></svg><p>The 2 Ω gets no current. I<sub>x</sub> = 3 A, source = 6 A, so I<sub>N</sub> = 9 A.</p></div><div class="card"><h3>3 · Open a–b: V<sub>oc</sub> and R<sub>N</sub></h3><svg class="dg" viewBox="0 0 1100 400" role="img" aria-label="Dependent source circuit, open"><path class="w" d="M80 156V100H200M320 100H780M470 100V160M470 240V300M620 100V150M620 250V300M80 244V300H780"/><circle class="cs" cx="80" cy="200" r="44"/><text x="80" y="214" class="tt" font-size="40" text-anchor="middle">12V</text><rect class="ra" x="200" y="80" width="120" height="40"/><rect class="ra" x="445" y="160" width="50" height="80"/><text x="260" y="60" class="ta" font-size="40" text-anchor="middle">4Ω</text><text x="260" y="160" class="tf" font-size="34" text-anchor="middle">I<tspan dy="7" font-size="70%">x</tspan><tspan dy="-7"> →</tspan></text><text x="430" y="212" class="ta" font-size="40" text-anchor="end">2Ω</text><path class="cs" d="M620 150L660 200L620 250L580 200Z"/><path class="tl" d="M620 228V176M606 190L620 176L634 190"/><text x="672" y="212" class="tt" font-size="38" text-anchor="start">2·I<tspan dy="7" font-size="70%">x</tspan></text><text x="805" y="212" class="tt" font-size="38" text-anchor="start">V<tspan dy="7" font-size="70%">oc</tspan><tspan dy="-7"> = 7.2 V</tspan></text><circle class="dt" cx="780" cy="100" r="9"/><circle class="dt" cx="780" cy="300" r="9"/><text x="810" y="112" class="tf" font-size="34" text-anchor="start">a</text><text x="810" y="312" class="tf" font-size="34" text-anchor="start">b</text></svg><p>V<sub>oc</sub> = 7.2 V, so R<sub>N</sub> = 7.2 / 9 = 0.8 Ω.</p></div><div class="card"><h3>4 · Norton equivalent</h3><svg class="dg" viewBox="0 0 1100 400" role="img" aria-label="Norton equivalent of the dependent source example"><path class="w" d="M140 100H740M140 300H740M140 100V156M140 244V300M440 100V160M440 240V300M740 100V160M740 240V300"/><circle class="cs" cx="140" cy="200" r="44"/><path class="tl" d="M140 225V175M125 190L140 175L155 190"/><rect class="ra" x="415" y="160" width="50" height="80"/><rect class="rt" x="715" y="160" width="50" height="80"/><text x="140" y="70" class="tt" font-size="34" text-anchor="middle">I<tspan dy="7" font-size="70%">N</tspan><tspan dy="-7"> = 9 A</tspan></text><text x="440" y="70" class="ta" font-size="34" text-anchor="middle">R<tspan dy="7" font-size="70%">N</tspan><tspan dy="-7"> = 0.8Ω</tspan></text><text x="740" y="70" class="tt" font-size="34" text-anchor="middle">R<tspan dy="7" font-size="70%">L</tspan><tspan dy="-7"> = 1.2Ω</tspan></text></svg><p>9 A ∥ 0.8 Ω with R<sub>L</sub> = 1.2 Ω. I<sub>L</sub> = 3.6 A.</p></div></div></section>
     <!-- Slide 8: Textbook Example 4.11 -->
     <section class="slide">
       <p class="kick">TEXTBOOK EXAMPLE 4.11</p>
